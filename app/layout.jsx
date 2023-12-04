@@ -2,7 +2,7 @@ import { Layout } from '@/components/dom/Layout'
 import '@/global.css'
 
 export const metadata = {
-  title: 'Next.js + Three.js',
+  title: 'Everything & Nothing',
   description: 'A minimal starter for Nextjs + React-three-fiber and Threejs.',
 }
 
