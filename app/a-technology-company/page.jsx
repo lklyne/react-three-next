@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
+import { useControls, Leva } from 'leva'
 
 import InfinityText from '@/components/canvas/InfinityText'
 
@@ -24,12 +25,23 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 
 export default function Page() {
+  const config = useControls('Text', {
+    text: 'EVERYTHING & NOTHING ',
+    color: '#fFFFFF',
+    fontSize: { value: 0.4, min: 0.1, max: 2 },
+    fontDepth: { value: 0.14, min: 0.01, max: 3.5 },
+    uRadius: { value: 1.68, min: 0.1, max: 3 },
+    uTwists: { value: 3, min: 0, max: 3, step: 1 },
+    uTwistSpeed: { value: 100, min: -100, max: 100, step: 1 },
+    uRotateSpeed: { value: 3, min: 0, max: 3, step: 0.01 },
+  })
+
   return (
     <>
       <View orbit className='relative h-full w-full'>
         <Suspense fallback={null}>
           {/* <Dog scale={2} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} /> */}
-          <InfinityText />
+          <InfinityText config={config} />
           <Common color={'lightpink'} />
         </Suspense>
       </View>
