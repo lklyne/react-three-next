@@ -6,10 +6,11 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { mergeBufferGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
 import { extend } from '@react-three/fiber'
 import { MeshTransmissionMaterial } from '@react-three/drei'
+import { TextModel } from './TextModel.jsx'
 
 extend({ TextGeometry })
 
-export default function MyText({ config }) {
+export default function InfinityText({ config }) {
   const refMesh = useRef()
   const refMaterial = useRef()
   console.log(config, 'config!!!')
@@ -111,10 +112,10 @@ export default function MyText({ config }) {
         `
           float xx = mapRange(position.x, uMin.x, uMax.x, -1., 1.0);
           // twistnormal
-          objectNormal = rotate(objectNormal, vec3(1.,0.,0.), 0.5*PI*uTwists*xx + 0.01*uTime*uTwistSpeed);
+          objectNormal = rotate(objectNormal, vec3(-1.,0.,0.), 0.5*PI*uTwists*xx + 0.01*uTime*uTwistSpeed);
   
           // circled normal
-          objectNormal = rotate(objectNormal, vec3(0.,0.,1.), (xx + 0.01*uTime*uRotateSpeed)*PI);
+          objectNormal = rotate(objectNormal, vec3(0.,0.,-1.), (xx + 0.01*uTime*uRotateSpeed)*PI);
       
       `,
     )
@@ -125,7 +126,7 @@ export default function MyText({ config }) {
         `
         vec3 pos = transformed;
         float theta = (xx + 0.01*uTime*uRotateSpeed)*PI;
-        pos = rotate(pos,vec3(1.,0.,0.), 0.5*PI*uTwists*xx + 0.01*uTime*uTwistSpeed);
+        pos = rotate(pos,vec3(-1.,0.,0.), 0.5*PI*uTwists*xx + 0.01*uTime*uTwistSpeed);
 
 
         
